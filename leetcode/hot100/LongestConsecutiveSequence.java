@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * LeetCode 128. 最长连续序列（热题 HOT 100）
@@ -23,8 +23,28 @@ import java.util.Arrays;
  */
 class Solution {
     public int longestConsecutive(int[] nums) {
-        // 在这里写你的解法
-        return 0;
+        if (nums.length == 0) {
+            return 0;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums) {
+            set.add(i);
+        }
+        List<Integer> list = new ArrayList<>(set);
+        Collections.sort(list);
+        int len = 1;
+        int max = 1;
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i) == list.get(i + 1) - 1) {
+                len++;
+                if (max < len) {
+                    max = len;
+                }
+            } else {
+                len = 1;
+            }
+        }
+        return max;
     }
 }
 
