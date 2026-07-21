@@ -24,7 +24,31 @@ import java.util.Arrays;
 class TrappingRainWaterSolution {
     public int trap(int[] height) {
         // 在这里写你的解法
-        return 0;
+        int right_max = 0;
+        int left_max = 0;
+        int left_sum = 0;
+        int right_sum = 0;
+        int left = 0;
+        int right = height.length - 1;
+        while (right > left){
+            if(height[left] < height[right]){
+                if(height[left]>left_max){
+                    left_max = height[left];
+                }else {
+                    left_sum += left_max - height[left];
+                }
+                left++;
+            }else {
+                if (height[right]>right_max){
+                    right_max = height[right];
+                }else {
+                    right_sum += right_max - height[right];
+                }
+                right--;
+            }
+        }
+
+        return left_sum + right_sum;
     }
 }
 
