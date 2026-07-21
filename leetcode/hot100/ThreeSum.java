@@ -30,12 +30,37 @@
  */
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class ThreeSumSolution {
     public List<List<Integer>> threeSum(int[] nums) {
         // 在这里写你的解法
-        return new ArrayList<>();
+        ArrayList<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        int len = nums.length;
+        for(int i = 0; i < len-2;i++){
+            if(nums[i]>0){
+                break;
+            }
+            int j = i+1;
+            int k = len - 1;
+            while (k>j){
+                if(nums[i]+nums[j]+nums[k] == 0){
+                    ArrayList<Integer> ls = new ArrayList<>();
+                    ls.add(nums[i]);
+                    ls.add(nums[j]);
+                    ls.add(nums[k]);
+                    list.add(ls);
+                    break;
+                } else if (nums[i]+nums[j]+nums[k] > 0) {
+                    k--;
+                }else {
+                    j++;
+                }
+            }
+        }
+        return list;
     }
 }
 
