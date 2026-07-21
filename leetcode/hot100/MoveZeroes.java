@@ -22,15 +22,24 @@ import java.util.Arrays;
  *
  * 进阶：你能尽量减少完成操作所需的交换次数吗？
  */
-class Solution {
+class MoveZeroesSolution {
     public void moveZeroes(int[] nums) {
-        // 在这里写你的解法
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if (nums[fast] != 0) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+        }
+        for (; slow < nums.length; slow++) {
+            nums[slow] = 0;
+        }
     }
 }
 
 public class MoveZeroes {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        MoveZeroesSolution s = new MoveZeroesSolution();
 
         check(s, new int[]{0, 1, 0, 3, 12}, new int[]{1, 3, 12, 0, 0}, "case1");
         check(s, new int[]{0}, new int[]{0}, "case2");
@@ -38,7 +47,7 @@ public class MoveZeroes {
         check(s, new int[]{0, 0, 1}, new int[]{1, 0, 0}, "case4");
     }
 
-    private static void check(Solution s, int[] nums, int[] expected, String name) {
+    private static void check(MoveZeroesSolution s, int[] nums, int[] expected, String name) {
         s.moveZeroes(nums);
         boolean ok = Arrays.equals(nums, expected);
         System.out.printf("[%s] %s -> %s (期望 %s)%n",
