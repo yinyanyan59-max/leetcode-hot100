@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * LeetCode 438. 找到字符串中所有字母异位词（热题 HOT 100）
@@ -33,7 +31,22 @@ import java.util.List;
 class FindAllAnagramsInAStringSolution {
     public List<Integer> findAnagrams(String s, String p) {
         // 在这里写你的解法
-        return new ArrayList<>();
+        char[] strs1 = p.toCharArray();
+        Arrays.sort(strs1);
+        char[] strs2 = s.toCharArray();
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=0;i<=strs2.length-strs1.length;i++){
+            char[] strs = new char[strs1.length];
+            for (int j=i;j <= (i + strs1.length-1); j++){
+                strs[j-i] = strs2[j];
+            }
+            Arrays.sort(strs);
+            if(Arrays.equals(strs, strs1)){
+                list.add(i);
+            }
+        }
+
+        return list;
     }
 }
 
