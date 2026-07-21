@@ -21,7 +21,7 @@ import java.util.*;
  *   0 <= nums.length <= 10^5
  *   -10^9 <= nums[i] <= 10^9
  */
-class Solution {
+class LongestConsecutiveSequenceSolution {
     public int longestConsecutive(int[] nums) {
         if (nums.length == 0) {
             return 0;
@@ -50,7 +50,7 @@ class Solution {
 
 public class LongestConsecutiveSequence {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        LongestConsecutiveSequenceSolution s = new LongestConsecutiveSequenceSolution();
         Object[][] cases = {
             {new int[]{100, 4, 200, 1, 3, 2}, 4},
             {new int[]{0, 3, 7, 2, 5, 8, 4, 6, 0, 1}, 9},

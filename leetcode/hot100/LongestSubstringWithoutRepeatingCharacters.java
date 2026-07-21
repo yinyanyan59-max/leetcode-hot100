@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * LeetCode 3. 无重复的字符的最长子串（热题 HOT 100）
@@ -8,25 +10,30 @@ import java.util.Arrays;
  */
 class LongestSubstringWithoutRepeatingCharactersSolution {
     public int lengthOfLongestSubstring(String s) {
-        if (s == null || s.length() == 0) {
+        if (s==null || s.isEmpty()){
             return 0;
         }
-        // last[c] 记录字符 c 最近一次出现的位置（-1 表示未出现）
-        int[] last = new int[256];
-        Arrays.fill(last, -1);
-        int left = 0;  // 当前窗口左边界（包含）
-        int best = 0;
-
-        for (int right = 0; right < s.length(); right++) {
-            char c = s.charAt(right);
-            if (last[c] >= left) {
-                // c 已在窗口内出现过，移动左边界到 c 上次出现位置的右侧
-                left = last[c] + 1;
+        int max_len = 0;
+        int fast = 0;
+        for(int low = 0; low < s.length()-1; low=fast){
+            Map<String, Integer> hashmap = new HashMap<>();
+            hashmap.put(String.valueOf(s.charAt(low)), 0);
+            fast = low + 1;
+            int len = 1;
+            while (!hashmap.containsKey(String.valueOf(s.charAt(fast)))){
+                hashmap.put(String.valueOf(s.charAt(fast)), 0);
+                fast++;
+                len++;
+                if (fast >= s.length()){
+                    break;
+                }
             }
-            last[c] = right;
-            best = Math.max(best, right - left + 1);
+            if (len > max_len){
+                max_len= len;
+            }
+
         }
-        return best;
+        return max_len;
     }
 }
 

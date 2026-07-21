@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * 进阶：你可以想出一个时间复杂度小于 O(n^2) 的算法吗？
  */
-class Solution {
+class TwoSumSolution {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
@@ -42,7 +42,7 @@ class Solution {
 
 public class TwoSum {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        TwoSumSolution s = new TwoSumSolution();
         Object[][] cases = {
             {new int[]{2, 7, 11, 15}, 9, new int[]{0, 1}},
             {new int[]{3, 2, 4}, 6, new int[]{1, 2}},
@@ -72,3 +72,4 @@ public class TwoSum {
         }
     }
 }
+

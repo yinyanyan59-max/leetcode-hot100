@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * LeetCode 49. 字母异位词分组（热题 HOT 100）
@@ -33,7 +29,7 @@ import java.util.Map;
  *   0 <= strs[i].length <= 100
  *   strs[i] 仅包含小写字母
  */
-class Solution {
+class GroupAnagramsSolution {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         for (String str : strs) {
@@ -44,13 +40,13 @@ class Solution {
             list.add(str);
             map.put(key, list);
         }
-        return new ArrayList<List<String>>(map.values());
+        return new ArrayList<>(map.values());
     }
 }
 
 public class GroupAnagrams {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        GroupAnagramsSolution s = new GroupAnagramsSolution();
 
         // Case 1
         check(s.groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}),
@@ -86,10 +82,10 @@ public class GroupAnagrams {
         if (groups == null) {
             return null;
         }
-        List<List<String>> copy = new java.util.ArrayList<>();
+        List<List<String>> copy = new ArrayList<>();
         for (List<String> g : groups) {
-            List<String> one = new java.util.ArrayList<>(g);
-            java.util.Collections.sort(one);
+            List<String> one = new ArrayList<>(g);
+            Collections.sort(one);
             copy.add(one);
         }
         copy.sort((a, b) -> {
@@ -100,3 +96,4 @@ public class GroupAnagrams {
         return copy;
     }
 }
+
