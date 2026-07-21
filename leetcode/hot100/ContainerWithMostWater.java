@@ -27,8 +27,21 @@
  */
 class ContainerWithMostWaterSolution {
     public int maxArea(int[] height) {
-        // 在这里写你的解法
-        return 0;
+        int maxSize = 0;
+        int low = 0;
+        int fast = height.length - 1;
+        while (fast > low) {
+            int size = (fast - low) * Math.min(height[fast], height[low]);
+            if (size > maxSize) {
+                maxSize = size;
+            }
+            if (height[fast] > height[low]) {
+                low++;
+            } else {
+                fast--;
+            }
+        }
+        return maxSize;
     }
 }
 
