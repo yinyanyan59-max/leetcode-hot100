@@ -1,4 +1,7 @@
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 
 /**
  * LeetCode 239. 滑动窗口最大值（热题 HOT 100）
@@ -34,7 +37,23 @@ import java.util.Arrays;
 class SlidingWindowMaximumSolution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         // 在这里写你的解法
-        return new int[0];
+        int[] result = new int [nums.length-k+1];
+        Deque<Integer> deque= new ArrayDeque<>();
+        for (int i=0;i<nums.length;i++) {
+            while (!deque.isEmpty() && deque.peekLast() < nums[i]) {
+                deque.pollLast();
+            }
+            deque.addLast(nums[i]);
+            if (i == k - 1) {
+                result[i-k+1] = deque.peekFirst();
+            }else if (i > k-1){
+                if(nums[i-k]==deque.peekFirst()){
+                    deque.pollFirst();
+                }
+                result[i-k+1] = deque.peekFirst();
+            }
+        }
+        return result;
     }
 }
 
@@ -42,7 +61,7 @@ public class SlidingWindowMaximum {
     public static void main(String[] args) {
         SlidingWindowMaximumSolution s = new SlidingWindowMaximumSolution();
 
-        check(s, new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3, new int[]{3, 3, 5, 5, 6, 7}, "case1");
+        check(s, new int[]{1, 3, -1, -3, -2, 3, 6, 7}, 3, new int[]{3, 3, -1, 3, 6, 7}, "case1");
         check(s, new int[]{1}, 1, new int[]{1}, "case2");
         check(s, new int[]{9, 11}, 2, new int[]{11}, "case3");
     }
