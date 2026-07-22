@@ -30,7 +30,18 @@ import java.util.Arrays;
 class MaximumSubarraySolution {
     public int maxSubArray(int[] nums) {
         // 在这里写你的解法
-        return 0;
+        int max = nums[0];
+        int current_max = 0;
+        int i = 0;
+        while(i<nums.length){
+            current_max += nums[i];
+            max = Math.max(max, current_max);
+            if (current_max < 0){
+                current_max=0;
+            }
+            i++;
+        }
+        return max;
     }
 }
 
