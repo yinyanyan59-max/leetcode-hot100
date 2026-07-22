@@ -30,6 +30,51 @@
 class MinimumWindowSubstringSolution {
     public String minWindow(String s, String t) {
         // 在这里写你的解法
+        int[] need = new int[128];
+        int[] window = new int[128];
+        int valid = 0;
+        int count = 0;
+        for(char c:t.toCharArray()){
+            need[c]++;
+        }
+        for (int num : need) {
+            if (num != 0) {
+                count++;
+            }
+        }
+        int left = 0;
+        int start = 0;
+        int min_len = Integer.MAX_VALUE;
+        char[] str_s = new char[s.length()];
+        str_s = s.toCharArray();
+        for(int right=0;right<s.length();right++){
+            if(need[s.charAt(right)]>0){
+                window[s.charAt(right)] ++;
+                if(window[s.charAt(right)]==need[s.charAt(right)]){
+                    valid++;
+                }
+            }
+            if (valid == count){
+                while(valid == count && left <= right){
+                    if (right - left < min_len) {
+                        start = left;
+                        min_len = right - left + 1;
+                    }
+                    if(need[s.charAt(left)]>0){
+
+                        if(window[s.charAt(left)]==need[s.charAt(left)]){
+                            valid--;
+                        }
+                        window[s.charAt(left)] --;
+                    }
+                    left++;
+                }
+            }
+        }
+        if (min_len<=s.length()){
+            return s.substring(start, start+min_len);
+        }
+
         return "";
     }
 }
