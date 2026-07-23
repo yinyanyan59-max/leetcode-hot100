@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * LeetCode 189. 轮转数组（热题 HOT 100）
@@ -31,8 +34,24 @@ import java.util.Arrays;
  *   你可以使用空间复杂度为 O(1) 的原地算法解决这个问题吗？
  */
 class RotateArraySolution {
+    public void reverse(int[] nums, int left, int right){
+        int tmp = 0;
+        while(right>left){
+            tmp = nums[right];
+            nums[right] = nums[left];
+            nums[left] = tmp;
+            right--;
+            left++;
+        }
+
+    }
+
     public void rotate(int[] nums, int k) {
         // 在这里写你的解法
+        int k_true = k % (nums.length);
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k_true-1);
+        reverse(nums, k_true, nums.length - 1);
     }
 }
 
