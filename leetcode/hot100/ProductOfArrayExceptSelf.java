@@ -28,7 +28,19 @@ import java.util.Arrays;
 class ProductOfArrayExceptSelfSolution {
     public int[] productExceptSelf(int[] nums) {
         // 在这里写你的解法
-        return new int[0];
+        int[] left = new int[nums.length];
+        int[] right = new  int[nums.length];
+        int[] result = new int[nums.length];
+        left[0] = 1;
+        right[nums.length-1] = 1;
+        for(int i = 1; i<nums.length;i++){
+            left[i] = left[i-1]*nums[i-1];
+            right[nums.length-i-1] = right[nums.length-i] * nums[nums.length - i];
+        }
+        for(int i = 0; i<nums.length;i++){
+            result[i] = left[i] * right[i];
+        }
+        return result;
     }
 }
 
