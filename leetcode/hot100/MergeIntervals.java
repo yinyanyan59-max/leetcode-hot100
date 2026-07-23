@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -25,7 +26,41 @@ import java.util.Arrays;
 class MergeIntervalsSolution {
     public int[][] merge(int[][] intervals) {
         // 在这里写你的解法
-        return new int[0][];
+        for(int i=0;i<intervals.length;i++){
+            for(int j=i+1;j<intervals.length;j++){
+                if(intervals[i][0]>intervals[j][0]){
+                    int[] tmp = intervals[i];
+                    intervals[i] = intervals[j];
+                    intervals[j] = tmp;
+                }
+            }
+        }
+        ArrayList<int[]> results = new ArrayList<>();
+        int n = 0;
+        for(int i =0;i<intervals.length;i++){
+            int j=i;
+            int[] temp = new int[2];
+            temp[0] = intervals[i][0];
+            temp[1] = intervals[i][1];
+            while(j+1<=intervals.length ){
+                if(j+1<intervals.length&&temp[1]>=intervals[j+1][0]){
+                    temp[1] = Math.max(temp[1], intervals[j+1][1]);
+                }else {
+                    break;
+                }
+                j++;
+            }
+            results.add(temp);
+            n++;
+            i = j;
+        }
+        int[][] arr = new int[results.size()][2];
+        int i = 0;
+        for(int[] result:results){
+            arr[i] = result;
+            i++;
+        }
+        return arr;
     }
 }
 
@@ -38,8 +73,8 @@ public class MergeIntervals {
                 new int[][]{{1, 6}, {8, 10}, {15, 18}},
                 "case1");
         check(s,
-                new int[][]{{1, 4}, {4, 5}},
-                new int[][]{{1, 5}},
+                new int[][]{{1, 10}, {2, 3},{4, 5}},
+                new int[][]{{1, 10}},
                 "case2");
         check(s,
                 new int[][]{{1, 4}, {0, 4}},
