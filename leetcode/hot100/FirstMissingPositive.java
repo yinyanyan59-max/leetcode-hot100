@@ -30,7 +30,21 @@ import java.util.Arrays;
 class FirstMissingPositiveSolution {
     public int firstMissingPositive(int[] nums) {
         // 在这里写你的解法
-        return 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            // 把 nums[i] 交换到它该在的位置（下标 nums[i]-1）
+            while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
+                int temp = nums[nums[i] - 1];
+                nums[nums[i] - 1] = nums[i];
+                nums[i] = temp;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+        return n + 1;
     }
 }
 
