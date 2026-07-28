@@ -25,7 +25,42 @@ import java.util.List;
 class SpiralMatrixSolution {
     public List<Integer> spiralOrder(int[][] matrix) {
         // 在这里写你的解法
-        return new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int count = 0;
+        int h = 0;
+        int w = 0;
+        while (list.size() < m*n){
+            int j = h;
+            int i = w;
+            for(; j<m-h;j++){
+                if(i==w){
+                    for(;i<n-w;i++){
+                        list.add(matrix[j][i]);
+                    }
+                }else {
+                    list.add(matrix[j][i - 1]);
+                }
+            }
+            i--;
+            j--;
+            if(i > w && j > h){
+                for(; j>h; j--){
+                    if(i> w){
+                        for(; i>w ;i--){
+                            list.add(matrix[j][i-1]);
+                        }
+                    }else{
+                        list.add(matrix[j][i]);
+                    }
+                }
+            }
+            h++;
+            w++;
+
+        }
+        return list;
     }
 }
 
@@ -33,8 +68,8 @@ public class SpiralMatrix {
     public static void main(String[] args) {
         SpiralMatrixSolution s = new SpiralMatrixSolution();
 
-        check(s, new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}},
-                Arrays.asList(1, 2, 3, 6, 9, 8, 7, 4, 5), "case1");
+        check(s, new int[][]{{1}, {4}, {7}},
+                Arrays.asList(1, 4, 7), "case1");
         check(s, new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}},
                 Arrays.asList(1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7), "case2");
         check(s, new int[][]{{1}}, Arrays.asList(1), "case3");
