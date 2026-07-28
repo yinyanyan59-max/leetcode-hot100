@@ -24,6 +24,22 @@ import java.util.Arrays;
 class RotateImageSolution {
     public void rotate(int[][] matrix) {
         // 在这里写你的解法
+        int left = 0;
+        int n = matrix.length;
+        while(left < (n/2 + 1)){
+            int right = n - left -1;
+            int tmp1,tmp2, tmp3 ;
+            for (int i = 0; i< right-left;i++){
+                tmp1 = matrix[left][left+i];
+                tmp2 = matrix[left + i][right];
+                tmp3 = matrix[right][right - i];
+                matrix[left][left+i] = matrix[right - i][left];
+                matrix[left + i][right] = tmp1;
+                matrix[right][right - i] = tmp2;
+                matrix[right - i][left] = tmp3;
+            }
+            left ++;
+        }
     }
 }
 
