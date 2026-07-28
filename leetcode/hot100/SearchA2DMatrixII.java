@@ -29,6 +29,31 @@ import java.util.Arrays;
 class SearchA2DMatrixIISolution {
     public boolean searchMatrix(int[][] matrix, int target) {
         // 在这里写你的解法
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int bottom = m - 1;
+        while(0 < bottom){
+            if (target < matrix[bottom][0]){
+                bottom -- ;
+            }else if (target > matrix[bottom][0]){
+                break;
+            }else if (target == matrix[bottom][0]){
+                return true;
+            }
+        }
+        for (int i=0; i<=bottom;i++){
+            int left = 0;
+            int right = n - 1;
+            while(left <= right){
+                if(target > matrix[i][(left+right)/2]){
+                    left = (left+right)/2 + 1;
+                }else if (target < matrix[i][(left+right)/2]){
+                    right = (left+right)/2 - 1;
+                }else {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 }
