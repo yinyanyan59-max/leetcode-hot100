@@ -46,7 +46,13 @@ class ListNode {
 class IntersectionOfTwoLinkedListsSolution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         // 在这里写你的解法
-        return null;
+        ListNode curA = headA;
+        ListNode curB = headB;
+        while(curB != curA){
+            curA=(curA==null)?headB:curA.next;
+            curB=(curB==null)?headA:curB.next;
+        }
+        return curA;
     }
 }
 
