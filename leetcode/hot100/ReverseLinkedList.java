@@ -35,7 +35,20 @@ class ReverseLinkedListNode {
 class ReverseLinkedListSolution {
     public ReverseLinkedListNode reverseList(ReverseLinkedListNode head) {
         // 在这里写你的解法
-        return null;
+        if(head == null) return head;
+        ReverseLinkedListNode pre = head;
+        ReverseLinkedListNode cur = head.next;
+        head = cur.next;
+        pre.next = null;
+        while(head!=null){
+            cur.next = pre;
+            pre = cur;
+            cur = head;
+            head = head.next;
+        }
+        cur.next = pre;
+        head = cur;
+        return head;
     }
 }
 
