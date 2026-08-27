@@ -32,7 +32,40 @@ class PalindromeLinkedListNode {
 class PalindromeLinkedListSolution {
     public boolean isPalindrome(PalindromeLinkedListNode head) {
         // 在这里写你的解法
-        return false;
+        PalindromeLinkedListNode pre = head;
+        PalindromeLinkedListNode cur = pre;
+        if (cur.next == null) return true;
+        PalindromeLinkedListNode fast = cur.next;
+        while(fast!=null && fast.next!=null){
+            cur = cur.next;
+            if (fast.next.next==null){
+                fast = fast.next;
+            }else {
+                fast = fast.next.next;
+            }
+        }
+        PalindromeLinkedListNode tail = cur.next;
+        cur.next = null;
+        cur = tail;
+        tail = cur.next;
+        cur.next = null;
+        while (tail!=null) {
+            pre = cur;
+            cur = tail;
+            tail = cur.next;
+            cur.next = pre;
+        }
+        PalindromeLinkedListNode left = head;
+        PalindromeLinkedListNode right = cur;
+        while(left!=right){
+            if(left.val == right.val){
+                left = left.next;
+                right = right.next;
+            }else {
+                return false;
+            }
+        }
+        return true;
     }
 }
 
