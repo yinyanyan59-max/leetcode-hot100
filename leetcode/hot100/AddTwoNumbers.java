@@ -39,7 +39,38 @@ class AddTwoNumbersNode {
 class AddTwoNumbersSolution {
     public AddTwoNumbersNode addTwoNumbers(AddTwoNumbersNode l1, AddTwoNumbersNode l2) {
         // 在这里写你的解法
-        return null;
+        AddTwoNumbersNode result = new AddTwoNumbersNode(0);
+        AddTwoNumbersNode head = result;
+        int jin = 0;
+        while (l1!=null&&l2!=null){
+            result.next = new AddTwoNumbersNode(0);
+            result.next.val = (l1.val+l2.val+jin)%10;
+            jin = (l1.val+l2.val+jin)/10;
+            result = result.next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        if (l1!= null){
+            while(l1!=null){
+                result.next = new AddTwoNumbersNode(0);
+                result.next.val = (l1.val+jin)%10;
+                jin = (l1.val+jin)/10;
+                result = result.next;
+                l1=l1.next;
+            }
+        }else if (l2!= null){
+            while(l2!=null){
+                result.next = new AddTwoNumbersNode(0);
+                result.next.val = (l2.val+jin)%10;
+                jin = (l2.val+jin)/10;
+                result = result.next;
+                l2=l2.next;
+            }
+        }
+        if(jin > 0){
+            result.next = new AddTwoNumbersNode(jin);
+        }
+        return head.next;
     }
 }
 
