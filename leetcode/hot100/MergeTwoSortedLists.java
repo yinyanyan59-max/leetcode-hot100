@@ -33,7 +33,28 @@ class MergeTwoSortedListsNode {
 class MergeTwoSortedListsSolution {
     public MergeTwoSortedListsNode mergeTwoLists(MergeTwoSortedListsNode list1, MergeTwoSortedListsNode list2) {
         // 在这里写你的解法
-        return null;
+        MergeTwoSortedListsNode s1 = list1;
+        MergeTwoSortedListsNode s2 = list2;
+        MergeTwoSortedListsNode result = new MergeTwoSortedListsNode(0);
+        MergeTwoSortedListsNode head = result;
+        while (s1!=null&&s2!=null){
+            if(s1.val <= s2.val){
+                result.next = s1;
+                s1 = s1.next;
+                result = result.next;
+            }else{
+                result.next = s2;
+                s2 = s2.next;
+                result = result.next;
+            }
+        }
+        if (s1 == null){
+            result.next = s2;
+        } else if (s2 == null) {
+            result.next = s1;
+        }
+        head = head.next;
+        return head;
     }
 }
 
