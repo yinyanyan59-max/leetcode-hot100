@@ -45,7 +45,22 @@ class LinkedListCycleIINode {
 class LinkedListCycleIISolution {
     public LinkedListCycleIINode detectCycle(LinkedListCycleIINode head) {
         // 在这里写你的解法
-        return null;
+        if(head==null || head.next==null) return null;
+        LinkedListCycleIINode slow = head;
+        LinkedListCycleIINode fast = head;
+        slow = slow.next;
+        fast = fast.next.next;
+        while(slow!=fast){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow = head;
+        while(slow!=fast){
+            slow=slow.next;
+            fast=fast.next;
+        }
+        LinkedListCycleIINode result = new LinkedListCycleIINode(slow.val);
+        return result;
     }
 }
 
