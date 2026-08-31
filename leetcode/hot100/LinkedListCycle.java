@@ -45,6 +45,16 @@ class LinkedListCycleNode {
 class LinkedListCycleSolution {
     public boolean hasCycle(LinkedListCycleNode head) {
         // 在这里写你的解法
+        if (head==null||head.next==null) return false;
+        LinkedListCycleNode slow = head;
+        LinkedListCycleNode fast = head;
+        while(fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if (slow==fast){
+                return true;
+            }
+        }
         return false;
     }
 }
