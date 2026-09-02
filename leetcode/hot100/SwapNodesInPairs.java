@@ -33,7 +33,24 @@ class SwapNodesInPairsNode {
 class SwapNodesInPairsSolution {
     public SwapNodesInPairsNode swapPairs(SwapNodesInPairsNode head) {
         // 在这里写你的解法
-        return null;
+        if (head == null || head.next == null) return head;
+        SwapNodesInPairsNode swap_left = head;
+        SwapNodesInPairsNode swap_right = swap_left.next;
+        SwapNodesInPairsNode right = swap_right.next;
+        swap_left.next = right;
+        swap_right.next = swap_left;
+        head = swap_right;
+        SwapNodesInPairsNode left = swap_left;
+        while(swap_left.next!=null&&swap_left!=null){
+            swap_left = left.next;
+            swap_right = swap_left.next;
+            right = swap_right.next;
+            swap_left.next = right;
+            swap_right.next = swap_left;
+            left.next = swap_right;
+            left = swap_left;
+        }
+        return head;
     }
 }
 
